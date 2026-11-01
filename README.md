@@ -11,52 +11,46 @@
   <b>Turning customer transaction data into actionable business insights using Python and Machine Learning.</b>
 </p>
 
+A beginner-friendly machine-learning portfolio project that groups customers using **RFM features** (Recency, Frequency, Monetary) and **K-Means clustering**, then presents the results in an interactive Streamlit dashboard.
+
+> The included CSV is synthetic demo data created for this project. It is not real customer data.
+
 ---
-
-## About The Project
-
-Customer Segmentation & Marketing Analytics is a data analytics and machine learning project that helps businesses understand their customers based on purchasing behaviour.
-
-The project uses **RFM Analysis (Recency, Frequency, Monetary)** and **K-Means Clustering** to identify different customer groups.
-
-It transforms raw transaction data into meaningful customer insights through an interactive Streamlit dashboard, helping businesses understand customer value, purchasing patterns and potential marketing opportunities.
 
 ## Dashboard Preview
 
 ### 1. Customer Analytics Dashboard
 
-An overview of customer activity, business KPIs, segment distribution and revenue contribution.
+Explore customer activity, business KPIs, segment distribution and revenue contribution.
 
-![Customer Analytics Dashboard](screenshots/dashboard-overview.png)
+![Customer Analytics Dashboard](screenshots/Screenshot%202026-11-01%20152349.png)
 
 ### 2. Customer Segment Analysis
 
-Explore customer characteristics and visualize the relationship between purchase frequency and customer spending.
+Understand customer segment characteristics and explore purchasing frequency against customer spending.
 
-![Customer Segment Analysis](screenshots/segment-analysis.png)
+![Customer Segment Analysis](screenshots/Screenshot%202026-11-01%20152400.png)
 
 ### 3. Marketing Recommendations & Customer Explorer
 
-Explore marketing strategies for different customer groups, filter customer records and download analytical reports.
+Explore suggested marketing actions, filter customer records and download analytical reports.
 
-![Marketing Recommendations and Customer Explorer](screenshots/customer-explorer.png)
+![Marketing Recommendations and Customer Explorer](screenshots/Screenshot%202026-11-01%20152412.png)
 
 ---
 
-## Key Features
+## Features
 
-- **Transaction Data Upload:** Upload custom customer transaction CSV files.
-- **Data Preprocessing:** Validate and clean transaction records.
-- **RFM Analysis:** Calculate Recency, Frequency and Monetary values for each customer.
-- **K-Means Clustering:** Group customers according to their purchasing patterns.
-- **Customer Segmentation:** Identify Champions, Loyal / High Value, Potential Loyalists and Needs Attention groups.
-- **Interactive Dashboard:** Explore customer analytics through charts and visualizations.
-- **Marketing Recommendations:** Generate suggested marketing actions for each segment.
-- **Customer Explorer:** Filter and inspect individual customer records.
-- **CSV Export:** Download customer lists and segment summaries.
-- **Clustering Evaluation:** Use silhouette score to assess cluster separation.
+- Upload a transaction CSV or use the included demo data.
+- Validate and clean transaction rows.
+- Calculate customer-level RFM metrics.
+- Apply log transformation, feature scaling and K-Means clustering.
+- Review a silhouette score as one clustering-quality diagnostic.
+- Explore segment sizes, spending, revenue share and customer records.
+- View suggested marketing actions for each segment.
+- Export customer-level and segment-summary CSV files.
 
-## Technologies & Tools
+## Technologies Used
 
 | Category | Technologies |
 |---|---|
@@ -65,58 +59,135 @@ Explore marketing strategies for different customer groups, filter customer reco
 | Machine Learning | Scikit-learn |
 | Algorithm | K-Means Clustering |
 | Analytics Method | RFM Analysis |
-| Data Preprocessing | Feature Engineering, Log Transformation, StandardScaler |
+| Data Preprocessing | Log Transformation, StandardScaler |
 | Visualization | Plotly |
 | Dashboard | Streamlit |
 | Development Tools | VS Code, Git, GitHub |
 
+## Requirements
+
+- Python 3.10 or newer
+- pip
+
+## Run Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/VarshaSV2005/customer-segmentation-project.git
+```
+
+### 2. Navigate to the project folder
+
+```bash
+cd customer-segmentation-project
+```
+
+### 3. Create a virtual environment
+
+**Windows (PowerShell):**
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks activation, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.venv\Scripts\Activate.ps1
+```
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 4. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 5. Run the application
+
+```bash
+streamlit run app.py
+```
+
+Streamlit will open the dashboard in your browser, usually at:
+
+`http://localhost:8501`
+
+## Input CSV Format
+
+Each row should represent an item on an invoice.
+
+| Column | Meaning | Example |
+|---|---|---|
+| `CustomerID` | Customer identifier | `C0001` |
+| `InvoiceDate` | Transaction date | `2025-10-10` |
+| `Quantity` | Number of items | `2` |
+| `UnitPrice` | Price per item | `19.99` |
+
+**Optional column:** `InvoiceNo`, used to count distinct purchases. If absent, each row is treated as a separate purchase.
+
+The application excludes rows with missing required values, duplicate rows, non-positive quantities and non-positive unit prices.
+
+Review your source data's cancelled invoices, refunds, currencies and tax treatment before interpreting revenue.
+
 ## How It Works
 
-The project follows a six-step workflow:
+**1. Recency**
 
-**1. Data Collection**
+Measures the number of days since a customer's latest purchase, relative to the day after the latest transaction in the uploaded dataset.
 
-Load the included sample transaction dataset or upload your own CSV file.
+**2. Frequency**
 
-**2. Data Cleaning**
+Counts the number of distinct invoices per customer.
 
-Validate transaction data and handle missing, duplicate and invalid records.
+**3. Monetary**
 
-**3. RFM Feature Engineering**
-
-Calculate three important customer metrics:
-
-- **Recency:** How recently did the customer make a purchase?
-- **Frequency:** How many distinct invoices did the customer generate?
-- **Monetary:** How much money did the customer spend?
+Calculates the total customer spending using quantity multiplied by unit price.
 
 **4. Data Preprocessing**
 
-Apply log transformation and StandardScaler to prepare customer features for clustering.
+Log transformation reduces feature skew, while StandardScaler brings features onto comparable scales.
 
-**5. Customer Clustering**
+**5. K-Means Clustering**
 
-Apply the K-Means algorithm to group customers with similar purchasing behaviour. Use silhouette score to evaluate cluster separation.
+The algorithm groups customers into K clusters based on their purchasing behaviour.
 
-**6. Business Insights**
+**6. Customer Interpretation**
 
-Display customer segments, spending patterns, visualizations and suggested marketing strategies through the Streamlit dashboard.
+Cluster labels are assigned using relative cluster profiles. These are heuristic descriptions, not guaranteed business classifications.
 
-## Understanding Customer Segments
+## Important Limitations
 
-| Segment | Description | Suggested Strategy |
-|---|---|---|
-| Champions | Recent, frequent and high-spending customers | Reward and retain |
-| Loyal / High Value | Valuable customers with established purchase history | Strengthen loyalty |
-| Potential Loyalists | Customers showing promising purchasing activity | Encourage repeat purchases |
-| Needs Attention | Customers with less recent or less frequent purchases | Re-engage carefully |
+- This is exploratory customer segmentation, not a model that predicts future purchases or customer churn.
+- The selected K value should be tested across different values and interpreted in a business context.
+- A silhouette score alone does not prove that clusters are useful.
+- Recency is calculated relative to the latest transaction date in the uploaded dataset, not today's date.
+- Real-world deployment requires privacy controls, access management, monitoring, currency normalization, returns handling and data-retention policies.
+- Marketing actions should respect customer consent, opt-outs and applicable privacy laws.
 
-*Segment labels are heuristic interpretations of cluster-level RFM characteristics. They are not manually verified customer classifications.*
+## Future Improvements
 
-## Project Structure
+- Add Elbow and Silhouette comparisons for K = 2 to 8.
+- Add customer cohort and lifetime value analysis.
+- Persist the trained scaler and model using Joblib.
+- Integrate PostgreSQL for database management.
+- Develop REST APIs using FastAPI.
+- Add authentication and cloud deployment.
+
+## Repository Structure
 
 ```text
-customer-segmentation/
+customer-segmentation-project/
 │
 ├── app.py
 │
@@ -127,113 +198,4 @@ customer-segmentation/
 │   ├── __init__.py
 │   └── pipeline.py
 │
-├── screenshots/
-│   ├── dashboard-overview.png
-│   ├── segment-analysis.png
-│   └── customer-explorer.png
-│
-├── models/
-├── reports/
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
-
-## Installation & Setup
-
-### Step 1: Clone the repository
-
-```bash
-git clone https://github.com/YOUR-USERNAME/customer-segmentation.git
-```
-
-### Step 2: Navigate to the project
-
-```bash
-cd customer-segmentation
-```
-
-### Step 3: Create a virtual environment
-
-```bash
-python -m venv .venv
-```
-
-### Step 4: Activate the environment
-
-**Windows:**
-
-```bash
-.venv\Scripts\activate
-```
-
-**macOS / Linux:**
-
-```bash
-source .venv/bin/activate
-```
-
-### Step 5: Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 6: Run the application
-
-```bash
-streamlit run app.py
-```
-
-Open the local URL displayed in your terminal:
-
-```text
-http://localhost:8501
-```
-
-## Input Dataset Format
-
-Upload a CSV file containing the following required columns:
-
-| Column | Description | Example |
-|---|---|---|
-| CustomerID | Unique customer identifier | C0001 |
-| InvoiceDate | Transaction date | 2025-10-10 |
-| Quantity | Number of items purchased | 2 |
-| UnitPrice | Price per item | 19.99 |
-| InvoiceNo | Invoice identifier | INV1001 |
-
-Each row represents an item in a transaction. Refer to the application's expected CSV format for the exact input requirements.
-
-## Learning Outcomes
-
-- Practical experience with Python-based data analytics.
-- Data cleaning and preprocessing using Pandas.
-- Customer-level feature engineering using RFM analysis.
-- Implementation of unsupervised machine learning.
-- Applying K-Means clustering to customer transaction data.
-- Evaluating clustering performance using silhouette score.
-- Building interactive dashboards with Streamlit.
-- Converting analytical results into business recommendations.
-
-## Future Enhancements
-
-- Customer Lifetime Value (CLV) analysis.
-- Customer cohort analysis.
-- Automated cluster optimization.
-- Database integration for transaction management.
-- REST API integration using FastAPI.
-- Cloud deployment and authentication.
-
-## Disclaimer
-
-This project uses synthetic sample transaction data for demonstration and educational purposes. Customer segments and marketing recommendations are exploratory and should be validated against real business data before making business decisions.
-
----
-
-<p align="center">
-  <b>Built with Python, Machine Learning and a passion for Data Analytics.</b>
-</p>
-
-<p align="center">
+├── screenshots
