@@ -35,14 +35,14 @@ An overview of customer activity, business KPIs, segment distribution and revenu
 
 Explore customer characteristics and visualize the relationship between purchase frequency and customer spending.
 
-![Customer Segment Analysis](<img width="1909" height="883" alt="Screenshot 2026-11-01 152400" src="https://github.com/user-attachments/assets/544e4d17-9a8c-4883-82ed-f0db3e24cf05" />
+![Customer Segment Analysis] (<img width="1909" height="883" alt="Screenshot 2026-11-01 152400" src="https://github.com/user-attachments/assets/544e4d17-9a8c-4883-82ed-f0db3e24cf05" />
 )
 
 ### 3. Marketing Recommendations & Customer Explorer
 
 Explore marketing strategies for different customer groups, filter customer records and download analytical reports.
 
-![Marketing Recommendations and Customer Explorer](<img width="1912" height="860" alt="Screenshot 2026-11-01 152412" src="https://github.com/user-attachments/assets/36b5d683-f28f-40b6-b70a-73ba19911c5d" />
+![Marketing Recommendations and Customer Explorer] (<img width="1912" height="860" alt="Screenshot 2026-11-01 152412" src="https://github.com/user-attachments/assets/36b5d683-f28f-40b6-b70a-73ba19911c5d" />
 )
 
 ---
